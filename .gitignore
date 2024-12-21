@@ -1,0 +1,27 @@
+
+# Ignore virtual environment files
+venv/
+.env/
+.venv/
+bin/
+lib/
+lib64/
+pyvenv.cfg
+
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS system files
+.DS_Store
+
+# IDE/editor directories
+.vscode/
+.idea/
+
+# Python distribution files
+*.egg-info/
+*.eggs/
+dist/
+build/
