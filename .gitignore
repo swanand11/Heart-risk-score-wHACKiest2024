@@ -1,17 +1,13 @@
-
-# Ignore virtual environment files
-venv/
-.env/
-.venv/
-bin/
-lib/
-lib64/
-pyvenv.cfg
+# Ignore virtual environment files inside server/myevn
+server/myenv/bin/
+server/myenv/lib/
+server/myenv/lib64/
+server/myenv/pyvenv.cfg
 
 # Python compiled files
-__pycache__/
+server/myenv/__pycache__/
 *.pyc
-*.pyo
+*.py
 
 # macOS system files
 .DS_Store
