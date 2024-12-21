@@ -35,7 +35,7 @@ def get_ecg():
     
     # Convert numpy arrays to lists and create data points
     data_points = [
-        {"time": float(t), "amplitude": float(a)} 
+        {"time": str(float(t)), "ecg": float(a)} 
         for t, a in zip(time, ecg_signal)
     ]
     
