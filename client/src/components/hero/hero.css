@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+
+
+.hero {
+    display: flex;
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    color: white;
+  }
+.herodata p {
+    font-family: 'Raleway', sans-serif; 
+    font-size: 1.8rem;
+    font-weight: 700; 
+    line-height: 1.5;
+    padding: 15px;
+    margin-left: -200px;
+    text-shadow: 2px 2px 5px rgba(192, 181, 181, 0.5); 
+  }
+.herodots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: -200px;
+    gap: 10px;
+  }
+  .hero-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: gray;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  .hero-dot.orange {
+    background-color: orange;
+  }
+  .hero-dot:hover {
+    background-color: lightgray;
+    transform: scale(1.1);
+  }
+  .hero-dot.orange {
+    background-color: orange;
+    transform: scale(1.2); 
+  }
+  .right-content {
+    position: fixed; 
+    top: 0;
+    right: 0;
+    margin-top: 200px;
+    width: 30%; 
+    height: 100%;
+    overflow: hidden; 
+    z-index: -1;
+  }
+  
+  .right-content img {
+    max-width: 100%;
+    height: auto;
+    width: 90%;  
+  }
+ 
