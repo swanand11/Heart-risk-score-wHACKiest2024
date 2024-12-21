@@ -37,9 +37,11 @@ const LandingPage = () => {
           count={count}
           setCount={setCount}
           theme={theme}
-        />
+        /> <br/> <br/>
         <About theme={theme} />
+        <br/><br/>
         <Testimonial theme={theme} />
+        <br/>
         <Contact theme={theme} />
         <Footer theme={theme} />
       </div>

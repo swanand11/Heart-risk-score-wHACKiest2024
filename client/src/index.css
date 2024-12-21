@@ -69,3 +69,6 @@ body{
   padding:0;
   font-family: "SUSE", serif;
 }
+html {
+  scroll-behavior: smooth;
+}

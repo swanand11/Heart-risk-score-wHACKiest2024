@@ -13,21 +13,21 @@ import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import image from "../../assets/logoOP.png";
 import { useTheme } from "../Themecontext";
+import { FaSun, FaMoon } from "react-icons/fa"; // Import sun and moon icons
 import "./Navbar.css";
 
 const healthComponents = [
-    { title: "Dashboard", href: "#dashboard", description: "Monitor your ECG and heart health in real-time." },
+    { title: "Dashboard", href: "/dashboard", description: "Monitor your ECG and heart health in real-time." },
     { title: "Upload Data", href: "#upload", description: "Upload your ECG data for analysis." },
     { title: "Reports", href: "#reports", description: "View diagnostic reports and risk predictions." },
-    { title: "Resources", href: "#resources", description: "Learn about heart health and ECG monitoring." },
-
+    { title: "Resources", href: "/resources", description: "Learn about heart health and ECG monitoring." },
 ];
 
 const gettingStartedComponents = [
     { title: "Introduction", href: "/", description: "Learn how to get started with the platform." },
     { title: "Setup Devices", href: "#setup", description: "Connect and configure your ECG monitoring devices." },
-    { title: "User Guide", href: "#guide", description: "Step-by-step instructions for using all features." },
-    { title: "Support", href: "#support", description: "Get help with technical and platform issues." },
+    { title: "User Guide", href: "#about", description: "Step-by-step instructions for using all features." },
+    { title: "Support", href: "#contact", description: "Get help with technical and platform issues." },
 ];
 
 function NavMenu() {
@@ -114,9 +114,10 @@ function NavMenu() {
                     </Link>
                     <button
                         onClick={toggleTheme}
-                        className="px-4 py-2 text-sm font-medium bg-gray-200 rounded-md dark:bg-gray-700 dark:text-white"
+                        className="px-4 py-2 text-sm font-medium  flex items-center"
                     >
-                        {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                        {theme === "dark" ? <FaSun size={20} /> : <FaMoon size={20} />}
+                        
                     </button>
                 </div>
             </div>

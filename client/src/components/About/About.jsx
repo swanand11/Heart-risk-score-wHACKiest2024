@@ -5,6 +5,7 @@ import "./About.css";
 
 const About = ({ theme }) => {
   return (
+    <div id="about" >
     <div className="about-section-container">
       <div className="about-section-content">
         <div className="about-section-text-container">
@@ -37,7 +38,7 @@ const About = ({ theme }) => {
           />
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
 
