@@ -9,9 +9,10 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const root = window.document.documentElement;
+    // Remove the opposite theme class and add the current theme
     root.classList.remove(theme === "dark" ? "light" : "dark");
     root.classList.add(theme);
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("theme", theme); // Store the theme in localStorage
   }, [theme]);
 
   const toggleTheme = () => {

@@ -16,6 +16,17 @@
   width: 100%;
 }
 
+.dark .primary-heading {
+  color: #ffffff; /* Light text for headings in dark mode */
+}
+
+.dark .primary-text {
+  color: #d1d1d1; /* Light text for paragraphs in dark mode */
+}
+
+.dark .primary-subheading {
+  color: #ff6b6b; /* Keep red color in dark mode */
+}
 
 .about-section-text-container {
   flex: 1;
@@ -36,6 +47,11 @@
   font-weight: bold;
 }
 
+.primary-text {
+  font-size: 1em;
+  color: #000000;
+  line-height: 1.8;
+}
 .primary-text {
   font-size: 1em;
   color: #000000;

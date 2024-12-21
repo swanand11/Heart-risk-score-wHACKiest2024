@@ -3,12 +3,12 @@ import AboutBackground from "../../assets/Aboutme.png";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import "./About.css";
 
-const About = () => {
+const About = ({ theme }) => {
   return (
     <div className="about-section-container">
       <div className="about-section-content">
         <div className="about-section-text-container">
-          <p className="primary-subheading">About Us</p>
+          <p className={`primary-subheading ${theme === "light" ? "text-gray-300" : "text-gray-800"}`}>About Us</p>
           <h1 className="primary-heading">Transforming Heart Health with AI</h1>
           <strong><p className="primary-text">
             Our app leverages cutting-edge AI technology to analyze ECG data,

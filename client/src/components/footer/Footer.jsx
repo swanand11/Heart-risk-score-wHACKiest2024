@@ -1,11 +1,11 @@
-import { Link } from "react-router";
-import "./Footer.css"
-
-export default function Footer() {
+import { Link } from "react-router-dom";
+export default function Footer({ theme }) {
   return (
-    <footer className="foot py-6 text-gray-300 bg-gray-900">
+    <footer className={`foot py-6 ${theme === "light" ? "bg-gray-900 text-gray-300" : "bg-gray-100 text-gray-800"}`}>
       <div className="container px-4 mx-auto text-center">
-        <p className="text-sm">© 2024 Kardia Inc. All rights reserved.</p>
+        <p className={`text-sm ${theme === "light" ? "text-gray-300" : "text-gray-800"}`}>
+          © 2024 Kardia Inc. All rights reserved.
+        </p>
         <div className="flex justify-center mt-4 space-x-6">
           <Link to="https://facebook.com" target="_blank" aria-label="Facebook">
             <svg

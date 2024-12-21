@@ -2,10 +2,10 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { useEffect, useMemo, useState } from "react";
 import { loadSlim } from "@tsparticles/slim";
 
-const ParticlesComponent = (props) => {
+const ParticlesComponent1 = (props) => {
   const [init, setInit] = useState(false);
   const [darkMode, setDarkMode] = useState(
-    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
   );
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const ParticlesComponent = (props) => {
     () => ({
       background: {
         color: {
-          value: "#000033",
+          value: "transparent",
         },
       },
       fpsLimit: 144,
@@ -111,5 +111,5 @@ const ParticlesComponent = (props) => {
   );
 };
 
-export default ParticlesComponent;
+export default ParticlesComponent1;
   

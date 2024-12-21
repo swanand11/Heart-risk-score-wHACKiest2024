@@ -20,7 +20,7 @@ const healthComponents = [
     { title: "Upload Data", href: "#upload", description: "Upload your ECG data for analysis." },
     { title: "Reports", href: "#reports", description: "View diagnostic reports and risk predictions." },
     { title: "Resources", href: "#resources", description: "Learn about heart health and ECG monitoring." },
-    { title: "Alerts", href: "#alerts", description: "Stay updated with critical health notifications." },
+
 ];
 
 const gettingStartedComponents = [
@@ -34,7 +34,7 @@ function NavMenu() {
     const { theme, toggleTheme } = useTheme(); // Access theme and toggle function
 
     return (
-        <header className="sticky top-0 z-50 bg-white shadow-md dark:bg-gray-900">
+        <header className="sticky top-0 z-50 bg-white shadow-md dark:bg-slate-900">
             <div
                 className="container flex items-center px-3 py-1 mx-auto"
                 style={{ fontFamily: "var(--mc-typography-font-family-sans)", justifyContent: "space-around" }}

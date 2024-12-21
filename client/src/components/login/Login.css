@@ -1,0 +1,29 @@
+/* Example CSS for light and dark modes */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.light {
+    background-color: #b44242;
+    color: #000000;
+  }
+  
+  body.dark {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  /* Other styles you might want to adjust */
+  button {
+    background-color: transparent;
+    color: inherit;
+  }
+  
+  button.dark {
+    color: #ffffff;
+  }
+  
+  button.light {
+    color: #000000;
+  }
+  
