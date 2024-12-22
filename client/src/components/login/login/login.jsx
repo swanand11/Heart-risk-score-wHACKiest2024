@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "@/components/footer/Footer";
-import '../Login.css';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { 
+  getAuth, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { useTheme } from "../../Themecontext"; // Importing the theme context
 
 // Firebase configuration
 const firebaseConfig = {
@@ -26,29 +32,45 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [theme, setTheme] = useState("light");  // Manages the current theme
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { theme } = useTheme(); // Accessing the theme
 
-  // Handle login with email and password
+  // Check authentication state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/dashboard");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful!");
-      navigate("/dashboard"); // Redirect to dashboard after successful login
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Handle login with Google
   const handleGoogleLogin = async () => {
+    setLoading(true);
     try {
       await signInWithPopup(auth, provider);
       alert("Google login successful!");
-      // Redirect or perform further actions
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,19 +78,24 @@ export default function Login() {
     <>
       <Navbar />
       <div
-        className={`flex items-center justify-center h-screen ${theme === "dark" ? "dark" : ""}`}
+        className={`flex items-center justify-center h-screen ${
+          theme === "dark" ? "bg-gray-900" : "bg-gray-100"
+        }`}
         style={{ fontFamily: "'Open Sans', sans-serif", fontWeight: 300 }}
       >
         <motion.div
-          className={`w-full max-w-md ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} rounded-lg shadow-lg`}
+          className={`w-full max-w-md rounded-lg shadow-lg ${
+            theme === "dark" ? "bg-gray-800" : "bg-white"
+          }`}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           <div className="p-8">
-            {/* Header */}
             <motion.h1
-              className={`mb-6 text-2xl font-light text-center ${theme === "dark" ? "text-white" : "text-black"}`}
+              className={`mb-6 text-2xl font-light text-center ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -76,7 +103,6 @@ export default function Login() {
               Welcome Back
             </motion.h1>
 
-            {/* Login Form */}
             <motion.form
               onSubmit={handleLogin}
               initial={{ opacity: 0, x: -20 }}
@@ -86,7 +112,9 @@ export default function Login() {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className={`block mb-2 text-sm font-bold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}
+                  className={`block mb-2 text-sm font-bold ${
+                    theme === "dark" ? "text-gray-300" : "text-gray-700"
+                  }`}
                 >
                   Email
                 </label>
@@ -95,7 +123,11 @@ export default function Login() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full px-4 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800 placeholder-${theme === "dark" ? "gray-400" : "gray-500"}`}
+                  className={`w-full px-4 py-2 border rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 ${
+                    theme === "dark"
+                      ? "bg-gray-700 text-gray-200 border-gray-600 focus:ring-gray-500"
+                      : "bg-white text-black border-gray-300 focus:ring-gray-800"
+                  }`}
                   placeholder="Enter your email"
                   required
                 />
@@ -104,7 +136,9 @@ export default function Login() {
               <div className="mb-6">
                 <label
                   htmlFor="password"
-                  className={`block mb-2 text-sm font-bold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}
+                  className={`block mb-2 text-sm font-bold ${
+                    theme === "dark" ? "text-gray-300" : "text-gray-700"
+                  }`}
                 >
                   Password
                 </label>
@@ -113,51 +147,81 @@ export default function Login() {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`w-full px-4 py-2 font-bold text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800 placeholder-${theme === "dark" ? "gray-400" : "gray-500"}`}
+                  className={`w-full px-4 py-2 font-bold border rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 ${
+                    theme === "dark"
+                      ? "bg-gray-700 text-gray-200 border-gray-600 focus:ring-gray-500"
+                      : "bg-white text-black border-gray-300 focus:ring-gray-800"
+                  }`}
                   placeholder="Enter your password"
                   required
                 />
               </div>
 
               {error && (
-                <p className="mb-4 text-sm text-red-500">{error}</p>
+                <p
+                  className={`mb-4 text-sm ${
+                    theme === "dark" ? "text-red-400" : "text-red-500"
+                  }`}
+                >
+                  {error}
+                </p>
               )}
 
               <motion.button
                 type="submit"
-                className={`w-full px-4 py-2 font-bold text-white bg-black rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2`}
+                className={`w-full px-4 py-2 font-bold rounded-md focus:outline-none focus:ring-2 ${
+                  theme === "dark"
+                    ? "bg-gray-700 text-white focus:ring-gray-500 hover:bg-gray-600"
+                    : "bg-black text-white focus:ring-gray-700 hover:bg-gray-800"
+                }`}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                disabled={loading}
               >
-                Login
+                {loading ? "Loading..." : "Login"}
               </motion.button>
             </motion.form>
 
-            {/* Divider */}
             <div className="flex items-center justify-center my-6">
-              <span className={`px-4 text-sm font-bold ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>or</span>
+              <span
+                className={`px-4 text-sm font-bold ${
+                  theme === "dark" ? "text-gray-400" : "text-gray-500"
+                }`}
+              >
+                or
+              </span>
             </div>
 
-            {/* Google Login Button */}
             <motion.button
               onClick={handleGoogleLogin}
-              className={`w-full px-4 py-2 font-bold text-white ${theme === "dark" ? "bg-red-600 hover:bg-red-700" : "bg-red-500 hover:bg-red-600"} rounded-md focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2`}
+              className={`w-full px-4 py-2 font-bold rounded-md focus:outline-none focus:ring-2 ${
+                theme === "dark"
+                  ? "bg-red-600 text-white focus:ring-red-500 hover:bg-red-500"
+                  : "bg-red-500 text-white focus:ring-red-400 hover:bg-red-600"
+              }`}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              disabled={loading}
             >
-              Login with Google
+              {loading ? "Loading..." : "Login with Google"}
             </motion.button>
 
-            {/* Sign Up Redirect */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-center"
             >
-              <p className={`mb-4 text-sm font-bold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+              <p
+                className={`mb-4 text-sm font-bold ${
+                  theme === "dark" ? "text-gray-400" : "text-gray-700"
+                }`}
+              >
                 Don't have an account?{" "}
-                <NavLink to="/signup" className="text-blue-500">
+                <NavLink
+                  to="/signup"
+                  className="text-blue-500 hover:underline"
+                >
                   Signup
                 </NavLink>
               </p>

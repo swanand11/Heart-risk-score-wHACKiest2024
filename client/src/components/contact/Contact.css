@@ -46,3 +46,24 @@
     border: none;
     outline: none;
   }
+
+.inputfield::placeholder {
+  color: #a0aec0; 
+  opacity: 1;
+}
+
+
+body.dark-mode .inputfield::placeholder {
+  color: #718096; 
+  opacity: 1; 
+}
+
+
+.inputfield {
+  color: #000;
+}
+
+body.dark-mode .inputfield {
+  color: #fff; 
+  background-color: #2d3748; 
+}

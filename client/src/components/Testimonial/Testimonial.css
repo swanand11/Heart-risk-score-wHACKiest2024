@@ -1,4 +1,4 @@
-.testimonial-section-bottom {
+  .testimonial-section-bottom {
     margin-top: 2rem;
     background-color: rgb(241, 242, 242);
     padding: 1.5rem 2rem;
@@ -49,4 +49,17 @@
   .work-section-wrapper{
     margin: 0px 20px;
    
+  }
+
+  .work-section-wrapper.dark-mode .testimonial-section-bottom  {
+    background-color: #36414d;
+  }
+  .work-section-wrapper.dark-mode p{
+    color: white;
+  }
+  
+  .testimonials-stars-container {
+    display: flex;
+    gap: 5px;
+    color: #fbbf24; /* Star color remains the same */
   }
