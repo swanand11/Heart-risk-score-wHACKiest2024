@@ -1,6 +1,6 @@
 // firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc,getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 
 // Firebase configuration using the credentials you provided
@@ -18,4 +18,4 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);  // Firestore database instance
 
 // Export Firestore methods for use in components
-export { db, collection, addDoc };
+export { db, collection, addDoc ,getFirestore,getDocs};
