@@ -53,7 +53,7 @@ We have rigorously trained and fine-tuned our machine learning model to process 
 
 ### Core Team
 
-- **Backend Developer**: [Swanand Gadwe]  
+- **Backend Developer**: **[Swanand Gadwe]**  
   Developed the backend API, integrated the machine learning model, ensured smooth communication between the frontend and backend, and also trained the machine learning model to achieve an **88% accuracy** and **AUC of 0.95** for heart risk prediction.
 
 - **Frontend Developers**:  
