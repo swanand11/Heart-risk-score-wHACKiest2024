@@ -4,14 +4,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 import {
     ChartContainer,
     ChartLegend,
-    ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
 } from "../ui/chart"
 import axios from "axios"
-import { useEffect } from "react"
-import { useState } from "react"
-import Navbar from "../Navbar/Navbar"
+import { useEffect, useState } from "react"
+
 const chartConfig = {
     visitors: {
         label: "Visitors",
@@ -27,44 +25,80 @@ const chartConfig = {
 }
 
 export function ECGchart() {
-    const [chartData, setChartData] = useState([]); // Initialize as empty array
-    const [showECG, setShowECG] = useState(true); // Assuming you have a state to toggle ECG visibility
-    const [showiECG, setShowiECG] = useState(true); // Assuming you have a state to toggle iECG visibility
+    const [chartData, setChartData] = useState([]);
+    const [ecgParams, setEcgParams] = useState({
+        heartRate: 0,
+        oldpeak: 0,
+        stSlope: '',
+        restingEcg: ''
+    });
+    const [showECG, setShowECG] = useState(true);
+    const [showiECG, setShowiECG] = useState(true);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const fetchECGData = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('http://127.0.0.1:5000/generate_ecg');
+            
+            if (response.data && response.data.data_points) {
+                setChartData(response.data.data_points);
+                setEcgParams({
+                    heartRate: response.data.heart_rate,
+                    oldpeak: response.data.Oldpeak,
+                    stSlope: response.data.ST_Slope,
+                    restingEcg: response.data.RestingECG
+                });
+                setError(null);
+            } else {
+                setError('Invalid data format received');
+            }
+        } catch (err) {
+            setError(err.message);
+            console.error('Error fetching ECG data:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://127.0.0.1:5000/generate_ecg');
-                setChartData(response.data.ecg_data || []);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+        // Initial fetch
+        fetchECGData();
 
-        fetchData();
+        // Set up polling every 2 seconds
+        const intervalId = setInterval(fetchECGData, 2000);
+
+        // Cleanup on component unmount
+        return () => clearInterval(intervalId);
     }, []);
-    // useEffect(() => {
-    //     console.log(chartData);
-    // }, [chartData]);
 
-    const mergedData = (chartData || []).map((item) => ({
+    if (loading && !chartData.length) {
+        return <Card><CardContent>Loading ECG data...</CardContent></Card>;
+    }
+
+    if (error) {
+        return <Card><CardContent>Error: {error}</CardContent></Card>;
+    }
+
+    const mergedData = chartData.map((item) => ({
         time: item.time,
         ecg: showECG ? item.ecg : null,
         iecg: showiECG ? item.iecg : null,
     }));
 
-        <Navbar/>
     return (
-        
         <Card>
             <CardHeader className="flex items-center gap-2 py-5 space-y-0 border-b sm:flex-row">
                 <div className="grid flex-1 gap-1 text-center sm:text-left">
-                    <CardTitle>Area Chart - Interactive</CardTitle>
+                    <CardTitle>
+                        Real-time ECG Monitor - Heart Rate: {ecgParams.heartRate} BPM
+                        {loading && <span className="ml-2 text-sm text-muted-foreground">(Updating...)</span>}
+                    </CardTitle>
                     <CardDescription>
-                        Showing ECG data over the selected time range
+                        ST-Slope: {ecgParams.stSlope} | Oldpeak: {ecgParams.oldpeak} | RestingECG: {ecgParams.restingEcg}
                     </CardDescription>
                 </div>
-
             </CardHeader>
             <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
                 <ChartContainer
@@ -132,5 +166,5 @@ export function ECGchart() {
                 </ChartContainer>
             </CardContent>
         </Card>
-    )
+    );
 }
