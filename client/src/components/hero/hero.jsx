@@ -54,9 +54,8 @@ const HeroSection = () => {
         </p>
         <div className="flex justify-center my-10">
           <a
-            href="#"
-            className={`bg-gradient-to-r ${darkMode ? 'from-orange-600 to-orange-900' : 'from-orange-500 to-orange-800'} py-3 px-4 mx-3 rounded-md`}
-          >
+            href="/login"
+            className={`bg-gradient-to-r ${darkMode ? 'from-orange-600 to-orange-900' : 'from-orange-500 to-orange-800'} py-3 px-4 mx-3 rounded-md`} >
             Start for free
           </a>
         </div>

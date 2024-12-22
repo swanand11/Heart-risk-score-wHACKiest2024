@@ -32,7 +32,7 @@ function NavMenu() {
         },
         { title: "Upload Data", href: "#upload", description: "Upload your ECG data for analysis." },
         { title: "Reports", href: "#reports", description: "View diagnostic reports and risk predictions." },
-        { title: "Resources", href: "#resources", description: "Learn about heart health and ECG monitoring." },
+        { title: "Resources", href: "resources", description: "Learn about heart health and ECG monitoring." },
     ];
 
     const gettingStartedComponents = [
@@ -58,11 +58,11 @@ function NavMenu() {
                 className="container flex items-center px-3 py-1 mx-auto"
                 style={{ fontFamily: "var(--mc-typography-font-family-sans)", justifyContent: "space-around" }}
             >
-                <span className="flex items-center font-bold text-gray-800 dark:text-white mr-40">
+                <span className=" we flex items-center font-bold text-gray-800 dark:text-white mr-40">
                     <img src={image} alt="logo" viewBox="0 0 300 300" width="70" height="65" />
                     <h1 className="text-3xl">KARDIA</h1>
                 </span>
-                <div className="flex items-center space-x-4">
+                <div className="wa flex items-center space-x-4">
                     <NavigationMenu>
                         <NavigationMenuList className="flex space-x-4">
                             <NavigationMenuItem>
@@ -177,3 +177,4 @@ const ListItem = React.forwardRef(({ className, title, children, ...props }, ref
 ListItem.displayName = "ListItem";
 
 export default NavMenu;
+    

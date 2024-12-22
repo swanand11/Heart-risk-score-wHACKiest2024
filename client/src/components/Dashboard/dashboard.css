@@ -1,0 +1,20 @@
+.dash-grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);  
+    grid-template-rows: repeat(3, auto);   
+}
+
+.graph{
+    grid-column: span 2;
+}
+  @media (max-width: 750px) {
+    .dash-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;             
+    }
+    .graph{
+        grid-column: span 1;
+    }
+  }
+  

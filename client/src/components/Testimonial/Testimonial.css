@@ -63,3 +63,15 @@
     gap: 5px;
     color: #fbbf24; /* Star color remains the same */
   }
+  .yert{
+    display: flex;
+    flex-direction: row;
+  }
+  @media (max-width: 700px) {
+    .yert{
+      flex-direction: column;
+    }
+    .testimonial-section-bottom{
+      margin: 0px auto;
+    }
+  }

@@ -6,6 +6,7 @@ import ForumForm from "./components/Form/Form"
 import Login from "./components/login/login/login"
 import Dashboard from "./components/Dashboard/dashboard";
 import PrivateRoute from "./components/PrivateRoute"
+import Resources from "./components/Resources/Resources"
 
 export default function App() {
 
@@ -15,14 +16,16 @@ export default function App() {
       <Route path='signup' element={<SignUp />} />
       <Route path='/' element={<LandingPage />} />
       <Route path='signup' element={<SignUp />} />
-      <Route path='forum' element={<ForumForm />} />
+      <Route path='form' element={<ForumForm />} />
       <Route path="/dashboard" element={
         <PrivateRoute>
           <Dashboard />
         </PrivateRoute>
       }
       />
+      <Route path='resources' element={<Resources />} />
     </Route>
+    
   ))
   return (
     <>
