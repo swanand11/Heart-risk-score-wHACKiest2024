@@ -53,7 +53,7 @@ function NavMenu() {
     };
 
     return (
-        <header className="top-0 z-50 bg-white shadow-md dark:bg-slate-900">
+        <header className="sticky top-0 z-50 bg-white shadow-md dark:bg-slate-900">
             <div
                 className="container flex items-center px-3 py-1 mx-auto"
                 style={{ fontFamily: "var(--mc-typography-font-family-sans)", justifyContent: "space-around" }}
