@@ -57,7 +57,7 @@ We have rigorously trained and fine-tuned our machine learning model to process 
   Developed the backend API, integrated the machine learning model, ensured smooth communication between the frontend and backend, and also trained the machine learning model to achieve an **88% accuracy** and **AUC of 0.95** for heart risk prediction.
 
 - **Frontend Developers**:  
-  - **[Shashwath Prabhu]**: Designed and developed the user interface, emphasizing an intuitive and seamless experience for visualizing ECG data and heart risk scores, ensuring optimal user interaction.  
-  - **[Vedang Srivastava]**: Played a key role in creating responsive and interactive UI components, making sure that the data is presented clearly and is easily accessible for the users.  
+  - **[Vedang Srivastava]**: Designed and developed the user interface, emphasizing an intuitive and seamless experience for visualizing ECG data and heart risk scores, ensuring optimal user interaction.  
+  - **[Shashwath Prabhu]**: Played a key role in creating responsive and interactive UI components, making sure that the data is presented clearly and is easily accessible for the users.  
   - **[Roshan Sharma]**: Focused on refining the overall user journey, ensuring smooth navigation and enhancing the visual appeal of ECG data plots and risk score displays.
 
